@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Приложения
-    'app_habbits.apps.AppHabbitsConfig',
+    'app_habits.apps.AppHabitsConfig',
     'users.apps.UsersConfig'
 ]
 
