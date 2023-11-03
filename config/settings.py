@@ -44,9 +44,14 @@ INSTALLED_APPS = [
 
     # Django REST Framework
     'rest_framework',
+    'django_filters',
 
     # Авторизация с использованием JSON Web Token
     'rest_framework_simplejwt',
+
+    # Документация
+    'drf_yasg',
+    'drf_spectacular',
 
     # Приложения
     'app_habits.apps.AppHabitsConfig',
@@ -153,6 +158,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Atomic habits DRF-TG',
+    'DESCRIPTION': 'Атомные привычки: как создавать привычки. Трекер полезных привычек',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
 
 # Настройки срока действия токенов
