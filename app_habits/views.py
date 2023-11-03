@@ -1,5 +1,5 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from app_habits.models import Habit
 from app_habits.paginators import HabitPaginator
@@ -12,7 +12,7 @@ class HabitListAPIView(generics.ListAPIView):
 
     serializer_class = HabitSerializer
     pagination_class = HabitPaginator
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return Habit.objects.filter(owner=self.request.user)
