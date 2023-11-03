@@ -11,6 +11,4 @@ class IsOwner(BasePermission):
     message = 'Для этого действия вам необходимо быть создателем объекта!'
 
     def has_object_permission(self, request, view, obj):
-        if request.user == obj.owner:
-            return True
-        return False
+        return request.user == obj.owner
