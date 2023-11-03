@@ -46,6 +46,7 @@ class Habit(models.Model):
         """ Проверки выполнения привычки (должно быть не более 120 секунд) """
         if self.time_to_complete and self.time_to_complete > 120:
             raise ValidationError('Время выполнения привычки должно быть больше 0 и меньше 120 секунд!')
+        return super().save(**kwargs)
 
     class Meta:
         verbose_name = 'Привычка'
