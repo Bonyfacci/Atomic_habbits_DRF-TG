@@ -15,7 +15,7 @@ class User(AbstractUser):
     # Имя пользователя в телеграм.
     telegram_username = models.CharField(max_length=50, unique=True, verbose_name="Имя пользователя")
     # ID чата — уникальный номер телеграм-чата.
-    telegram_chat_id = models.PositiveBigIntegerField(default=0, unique=True, verbose_name="ID чата", **NULLABLE)
+    telegram_chat_id = models.CharField(max_length=50, default=0, unique=True, verbose_name="ID чата", **NULLABLE)
 
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []

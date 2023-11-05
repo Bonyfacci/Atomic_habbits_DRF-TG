@@ -9,6 +9,7 @@ class HabitAdmin(admin.ModelAdmin):
                     'place', 'time', 'action', 'periodicity', 'time_to_complete',
                     'pleasant_habit', 'related_habit',
                     'reward',
-                    'is_public',)
+                    'is_public',
+                    'last_send',)
     list_filter = ('owner', 'place', 'is_public', 'pleasant_habit')
     search_fields = ('owner', 'place', 'action', 'periodicity', 'reward')
