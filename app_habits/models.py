@@ -39,11 +39,22 @@ class Habit(models.Model):
                                     help_text='Признак публичности — привычки можно публиковать в общий доступ, '
                                               'чтобы другие пользователи могли брать в пример чужие привычки.')
 
+    last_send = models.DateTimeField(verbose_name='Последняя отправка напоминания', **NULLABLE)
+
     def __str__(self):
-        return f'Я буду {self.action} в {self.time} в {self.place}'
+        if self.reward:
+            reward = self.reward
+        elif self.related_habit:
+            reward = self.related_habit.action
+        else:
+            reward = 'Ты - свой самый лучший проект'
+        return f'Я буду делать {self.action} в {self.time}, ' \
+               f'\nместо: {self.place}' \
+               f'\nНаграда: {reward}'
 
     def save(self, *args, **kwargs):
         """ Проверки выполнения привычки (должно быть не более 120 секунд) """
+
         if self.time_to_complete and self.time_to_complete > 120:
             raise ValidationError('Время выполнения привычки должно быть больше 0 и меньше 120 секунд!')
         return super().save(**kwargs)

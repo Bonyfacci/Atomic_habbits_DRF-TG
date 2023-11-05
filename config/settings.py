@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'drf_spectacular',
 
+    # Распределенная система обработки задач в фоновом режиме
+    'django_celery_beat',
+
     # Приложения
     'app_habits.apps.AppHabitsConfig',
     'users.apps.UsersConfig'
@@ -131,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'Europe/Moscow'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 
@@ -172,4 +175,30 @@ SPECTACULAR_SETTINGS = {
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
+# Телеграм
+TELEGRAM_URL_BOT = 'https://api.telegram.org/bot'
+TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')  # Тут Ваш токен, который выдал - BotFather
+
+# URL-адрес брокера результатов, также Redis
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')  # 'redis://127.0.0.1:6379/0'
+
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')  # 'redis://127.0.0.1:6379/0'
+
+# Часовой пояс для работы Celery
+CELERY_TIMEZONE = os.getenv('CELERY_TIMEZONE')  # 'Europe/Madrid'
+
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
+
+# Максимальное время на выполнение задачи
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+# Настройки для выполнения периодических задач
+CELERY_BEAT_SCHEDULE = {
+    'check_user_habits_and_send': {
+        'task': 'app_habits.tasks.check_user_habits_and_send',  # Путь к задаче
+        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
 }
