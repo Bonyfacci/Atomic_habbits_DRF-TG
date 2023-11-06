@@ -17,7 +17,7 @@ def check_pleasant_habit_with_related_habit(related_habit):
     """ Проверки связанной привычки с признаком приятной привычки. """
 
     if related_habit and not related_habit.pleasant_habit:
-        raise ValidationError('Связанная привычка должна быть приятной приятной!')
+        raise ValidationError('Связанная привычка должна быть приятной!')
 
 
 def check_no_reward_or_related_habit_for_pleasant_habit(data):
