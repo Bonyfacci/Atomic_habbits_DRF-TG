@@ -18,6 +18,17 @@ class HabitListAPIView(generics.ListAPIView):
         return Habit.objects.filter(owner=self.request.user)
 
 
+class PublicHabitListAPIView(generics.ListAPIView):
+    """ Контроллер просмотра публичных привычек """
+
+    serializer_class = HabitSerializer
+    pagination_class = HabitPaginator
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Habit.objects.filter(is_public=True)
+
+
 class HabitCreateAPIView(generics.CreateAPIView):
     """ Контроллер создания привычки """
 
