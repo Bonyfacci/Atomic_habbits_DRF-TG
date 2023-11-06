@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'drf_spectacular',
 
+    # CORS - механизм безопасности браузера
+    'corsheaders',
+
     # Распределенная система обработки задач в фоновом режиме
     'django_celery_beat',
 
@@ -69,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'corsheaders.middleware.CorsMiddleware'
 ]
 
@@ -202,3 +206,14 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
+
+# CORS - механизм безопасности браузера
+CORS_ALLOWED_ORIGINS = [
+    '<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",  # Замените на адрес вашего фронтенд-сервера и добавьте адрес бэкенд-сервера
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
