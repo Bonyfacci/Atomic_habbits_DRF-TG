@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     # Django REST Framework
     'rest_framework',
-    'django_filters',
 
     # Авторизация с использованием JSON Web Token
     'rest_framework_simplejwt',
@@ -209,7 +208,8 @@ CELERY_BEAT_SCHEDULE = {
 
 # CORS - механизм безопасности браузера
 CORS_ALLOWED_ORIGINS = [
-    '<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
+    "https://read-only.example.com",
+    "https://read-and-write.example.com",  # Замените на адрес вашего фронтенд-сервера
 ]
 
 CSRF_TRUSTED_ORIGINS = [
