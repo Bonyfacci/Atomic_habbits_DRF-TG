@@ -115,36 +115,37 @@ class HabitTestCase(APITestCase):
             status.HTTP_200_OK
         )
 
-    # def test_patch_habit(self):
-    #     """ Тест HabitUpdateAPIView для редактирования привычки """
-    #
-    #     self.client.force_authenticate(
-    #         user=self.user
-    #     )
-    #
-    #     data = {
-    #         "place": "Новый тест",
-    #         "action": "Новый тест"
-    #     }
-    #
-    #     response = self.client.patch(
-    #         reverse(
-    #             'app_habits:habit_update',
-    #             args=[self.habit.id]),
-    #         data=data
-    #         )
-    #
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_200_OK
-    #     )
-    #
-    #     self.habit.refresh_from_db()
-    #
-    #     self.assertEqual(
-    #         self.habit.action,
-    #         'Новый тест'
-    #     )
+    def test_patch_habit(self):
+        """ Тест HabitUpdateAPIView для редактирования привычки """
+
+        self.client.force_authenticate(
+            user=self.user
+        )
+
+        data = {
+            "place": "Новый тест",
+            "action": "Новый тест",
+            "periodicity": 1,
+        }
+
+        response = self.client.patch(
+            reverse(
+                'app_habits:habit_update',
+                args=[self.habit.id]),
+            data=data
+            )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+
+        self.habit.refresh_from_db()
+
+        self.assertEqual(
+            self.habit.action,
+            'Новый тест'
+        )
 
     def test_delete_habit(self):
         """ Тест HabitDestroyAPIView удаления привычки """
@@ -351,35 +352,35 @@ class HabitExceptionTestCase(APITestCase):
             {'non_field_errors': ["Привычка должна выполняться не реже 1 раза в 7 дней!"]}
         )
 
-    # def test_post_habit_exception_time_to_complete(self):
-    #     """ Проверки выполнения привычки (должно быть не более 120 секунд) """
-    #
-    #     self.client.force_authenticate(
-    #         user=self.user
-    #     )
-    #
-    #     data = {
-    #         "owner": self.user.id,
-    #         "place": "Новый тест",
-    #         "time": '15:00',
-    #         "action": "Новый тест",
-    #         "periodicity": 3,
-    #         "time_to_complete": 121,
-    #         "pleasant_habit": True,
-    #         "is_public": True,
-    #     }
-    #
-    #     response = self.client.post(
-    #         reverse('app_habits:habit_create'),
-    #         data=data
-    #     )
-    #
-    #     self.assertEqual(
-    #         response.status_code,
-    #         status.HTTP_400_BAD_REQUEST
-    #     )
-    #
-    #     self.assertEqual(
-    #         response.json(),
-    #         {'non_field_errors': ['Время выполнения привычки должно быть больше 0 и меньше 120 секунд!']}
-    #     )
+    def test_post_habit_exception_time_to_complete(self):
+        """ Проверки выполнения привычки (должно быть не более 120 секунд) """
+
+        self.client.force_authenticate(
+            user=self.user
+        )
+
+        data = {
+            "owner": self.user.id,
+            "place": "Новый тест",
+            "time": '15:00',
+            "action": "Новый тест",
+            "periodicity": 3,
+            "time_to_complete": 121,
+            "pleasant_habit": True,
+            "is_public": True,
+        }
+
+        response = self.client.post(
+            reverse('app_habits:habit_create'),
+            data=data
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_400_BAD_REQUEST
+        )
+
+        self.assertEqual(
+            response.json(),
+            ['Время выполнения привычки должно быть больше 0 и меньше 120 секунд!']
+        )
