@@ -125,7 +125,6 @@ class HabitTestCase(APITestCase):
         data = {
             "place": "Новый тест",
             "action": "Новый тест",
-            "periodicity": 1,
         }
 
         response = self.client.patch(
