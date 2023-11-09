@@ -10,7 +10,7 @@ def send_message_tg(habit, url, params):
     now = timezone.now()
 
     if habit.last_send:
-        if habit.last_send <= now - datetime.timedelta(days=habit.period):
+        if habit.last_send <= now - datetime.timedelta(days=habit.periodicity):
             requests.get(url, params=params)
             habit.last_send = timezone.now()
             habit.save()
