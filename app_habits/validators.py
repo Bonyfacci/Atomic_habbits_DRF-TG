@@ -39,5 +39,6 @@ class PeriodicityHabitValidator:
 
     def __call__(self, value):
         periodicity = dict(value).get(self.field)
-        if periodicity > 7 or periodicity == 0:
-            raise ValidationError('Привычка должна выполняться не реже 1 раза в 7 дней!')
+        if periodicity:
+            if periodicity > 7 or periodicity == 0:
+                raise ValidationError('Привычка должна выполняться не реже 1 раза в 7 дней!')
