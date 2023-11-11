@@ -125,7 +125,6 @@ class HabitTestCase(APITestCase):
         data = {
             "place": "Новый тест",
             "action": "Новый тест",
-            "periodicity": 1,
         }
 
         response = self.client.patch(
@@ -133,7 +132,7 @@ class HabitTestCase(APITestCase):
                 'app_habits:habit_update',
                 args=[self.habit.id]),
             data=data
-            )
+        )
 
         self.assertEqual(
             response.status_code,
