@@ -104,11 +104,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USER'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_HOST'),
-        'PORT': os.getenv('DATA_PORT'),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -185,12 +185,12 @@ TELEGRAM_URL_BOT = 'https://api.telegram.org/bot'
 TELEGRAM_API_TOKEN = os.getenv('TELEGRAM_API_TOKEN')  # Тут Ваш токен, который выдал - BotFather
 
 # URL-адрес брокера результатов, также Redis
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')  # 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')  # 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
 
 # Часовой пояс для работы Celery
-CELERY_TIMEZONE = os.getenv('CELERY_TIMEZONE')  # 'Europe/Madrid'
+CELERY_TIMEZONE = 'Europe/Madrid'
 
 # Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
