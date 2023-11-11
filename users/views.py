@@ -8,6 +8,11 @@ class UserCreateAPIView(generics.CreateAPIView):
     """ Контроллер создания пользователя """
     serializer_class = UserSerializer
 
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        instance.set_password(instance.password)
+        instance.save()
+
 
 class UserListAPIView(generics.ListAPIView):
     """ Контроллер просмотра всех пользователей """
