@@ -132,7 +132,7 @@ class HabitTestCase(APITestCase):
                 'app_habits:habit_update',
                 args=[self.habit.id]),
             data=data
-            )
+        )
 
         self.assertEqual(
             response.status_code,
