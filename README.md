@@ -77,23 +77,16 @@
 
 ***
 
-<h3>Работа с проектом:</h3>
+<h3>Работа с проектом с использованием Docker выполняется с помощью последовательности команд</h3>
 
- - Запустить Redis (в другом окне терминала под Ubuntu)
-<br> sudo service redis-server start
- - Запустить celery (в другом окне терминала)
-<br> celery -A config worker -l INFO -P eventlet
- - Запустить сервер
-<br> python manage.py runserver
+- docker-compose build - происходит сборка образа контейнера согласно инструкции в файле Dockerfile
+- docker-compose up - происходит последовательный запуск всех контейнеров согласно инструкции в файле docker-compose.yaml
 
 ***
 
-<h3>Завершение работы:</h3>
+<h3>Завершение работы с использованием Docker:</h3>
 
- - Остановить Redis (терминала под Ubuntu)
-<br> sudo service redis-server stop
- - Остановить сервер и celery
-<br> Ctrl+C
+ - Ctrl+C
 
 ***
 
